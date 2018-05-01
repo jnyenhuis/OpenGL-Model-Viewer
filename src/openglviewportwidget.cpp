@@ -14,6 +14,8 @@ void OpenGLViewportWidget::initializeGL()
     glEnable(GL_LIGHTING);
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
     glEnable(GL_COLOR_MATERIAL);
+
+
 }
 
 void OpenGLViewportWidget::paintGL()

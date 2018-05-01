@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui opengl
+QT += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets opengl
 
@@ -24,17 +24,28 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    openglviewportwidget.cpp
+        src\main.cpp \
+        src\mainwindow.cpp \
+    src\openglviewportwidget.cpp
 
 HEADERS += \
-        mainwindow.h \
-    openglviewportwidget.h
+        src\mainwindow.h \
+    src\openglviewportwidget.h
 
 FORMS += \
-        mainwindow.ui
+       src\mainwindow.ui
 
 LIBS += opengl32.lib
 
-DISTFILES +=
+DISTFILES += \
+    shader/shader.frag \
+    shader/shader.vert
+
+
+# path is the destination path.
+# files are the paths for the files to be copied to the destination path
+# TODO: make paths work for debug, release, etc
+shaders.path = $$quote($$OUT_PWD/debug/shader)
+shaders.files += $$quote($$PWD/shader/shader.frag)
+shaders.files += $$quote($$PWD/shader/shader.vert)
+INSTALLS += shaders
