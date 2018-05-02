@@ -15,7 +15,8 @@ OpenGLViewportWidget::OpenGLViewportWidget(QWidget *parent) : QOpenGLWidget(pare
 
 void OpenGLViewportWidget::initializeGL()
 {
-    glFunctions = new QOpenGLFunctions_3_3_Core;
+    initializeOpenGLFunctions();
+
     glClearColor(0,0,0,1);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHT0);
@@ -28,6 +29,16 @@ void OpenGLViewportWidget::initializeGL()
     std::string fragShaderText = OpenGlModelViewer::readAllText(shaderDir + "\\shader.frag");
     qDebug() << QString::fromStdString(vertShaderText) << "\n";
     qDebug() << QString::fromStdString(fragShaderText) << "\n";
+
+    const char *vertexShaderSource = vertShaderText.c_str();
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
+    glCompileShader(vertexShader);
+    GLint compiledSuccessfully;
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &compiledSuccessfully);
+    if (!compiledSuccessfully) {
+        qDebug() << "Failed to compile shader" << "\n";
+    }
 }
 
 void OpenGLViewportWidget::paintGL()

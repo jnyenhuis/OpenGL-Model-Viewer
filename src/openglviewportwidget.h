@@ -6,10 +6,9 @@
 #include <QOpenGLFunctions_3_3_Core>
 
 
-class OpenGLViewportWidget : public QOpenGLWidget
+class OpenGLViewportWidget : public QOpenGLWidget, public QOpenGLFunctions_3_3_Core
 {
 public:
-    QOpenGLFunctions_3_3_Core *glFunctions;
     uint vertexShader;
     uint fragmentShader;
     explicit OpenGLViewportWidget(QWidget *parent = nullptr);

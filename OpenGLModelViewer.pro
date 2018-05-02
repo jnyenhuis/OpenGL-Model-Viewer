@@ -27,13 +27,15 @@ SOURCES += \
         src\main.cpp \
         src\mainwindow.cpp \
     src\openglviewportwidget.cpp \
-    src/fileio.cpp
+    src/fileio.cpp \
+    src/shader.cpp
 
 HEADERS += \
         src\mainwindow.h \
     src\openglviewportwidget.h \
     src/globals.h \
-    src/fileio.h
+    src/fileio.h \
+    src/shader.h
 
 FORMS += \
        src\mainwindow.ui
