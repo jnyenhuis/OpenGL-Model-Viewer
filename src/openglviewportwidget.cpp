@@ -1,5 +1,13 @@
 #include "openglviewportwidget.h"
 
+#include <fstream>
+#include <string>
+#include <QDebug>
+#include <QString>
+
+#include "fileio.h"
+#include "globals.h"
+
 OpenGLViewportWidget::OpenGLViewportWidget(QWidget *parent) : QOpenGLWidget(parent)
 {
 
@@ -15,7 +23,11 @@ void OpenGLViewportWidget::initializeGL()
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
     glEnable(GL_COLOR_MATERIAL);
 
-
+    std::string shaderDir = OpenGlModelViewer::APPLICATION_DIRECTORY.toStdString() + "\\shader";
+    std::string vertShaderText = OpenGlModelViewer::readAllText(shaderDir + "\\shader.vert");
+    std::string fragShaderText = OpenGlModelViewer::readAllText(shaderDir + "\\shader.frag");
+    qDebug() << QString::fromStdString(vertShaderText) << "\n";
+    qDebug() << QString::fromStdString(fragShaderText) << "\n";
 }
 
 void OpenGLViewportWidget::paintGL()

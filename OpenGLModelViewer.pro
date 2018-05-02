@@ -26,11 +26,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         src\main.cpp \
         src\mainwindow.cpp \
-    src\openglviewportwidget.cpp
+    src\openglviewportwidget.cpp \
+    src/fileio.cpp
 
 HEADERS += \
         src\mainwindow.h \
-    src\openglviewportwidget.h
+    src\openglviewportwidget.h \
+    src/globals.h \
+    src/fileio.h
 
 FORMS += \
        src\mainwindow.ui
