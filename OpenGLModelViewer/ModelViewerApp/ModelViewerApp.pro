@@ -1,14 +1,14 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-04-28T17:08:29
+# Project created by QtCreator 2018-05-05T10:48:24
 #
 #-------------------------------------------------
 
 QT += core gui opengl
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets opengl
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = OpenGLModelViewer
+TARGET = ModelViewer
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
@@ -24,33 +24,33 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        src\main.cpp \
-        src\mainwindow.cpp \
-    src\openglviewportwidget.cpp \
-    src/fileio.cpp \
-    src/shader.cpp
+        ..\src\main.cpp \
+        ..\src\mainwindow.cpp \
+    ..\src\openglviewportwidget.cpp \
+    ..\src/fileio.cpp \
+    ..\src/shader.cpp
 
 HEADERS += \
-        src\mainwindow.h \
-    src\openglviewportwidget.h \
-    src/globals.h \
-    src/fileio.h \
-    src/shader.h
+        ..\src\mainwindow.h \
+    ..\src\openglviewportwidget.h \
+    ..\src/globals.h \
+    ..\src/fileio.h \
+    ..\src/shader.h
 
 FORMS += \
-       src\mainwindow.ui
+    ..\src\mainwindow.ui
 
 LIBS += opengl32.lib
 
 DISTFILES += \
-    shader/shader.frag \
-    shader/shader.vert
-
+    ../shader/shader.frag \
+    ../shader/shader.vert
 
 # path is the destination path.
 # files are the paths for the files to be copied to the destination path
 # TODO: make paths work for debug, release, etc
-shaders.path = $$quote($$OUT_PWD/debug/shader)
-shaders.files += $$quote($$PWD/shader/shader.frag)
-shaders.files += $$quote($$PWD/shader/shader.vert)
+message($$shell_path($$top_srcdir/shader/shader.vert))
+shaders.path = $$shell_path($$OUT_PWD/debug/shader)
+shaders.files += $$shell_path($$top_srcdir/shader/shader.frag)
+shaders.files += $$shell_path($$top_srcdir/shader/shader.vert)
 INSTALLS += shaders

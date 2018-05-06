@@ -12,12 +12,12 @@ Shader::Shader(QOpenGLFunctions_3_3_Core *gl, std::string vertShaderPath, std::s
 
     // Attach vertex shader.
     vertexShaderId = gl->glCreateShader(GL_VERTEX_SHADER);
-    loadShaderSource(vertShaderPath, GL_VERTEX_SHADER, gl);
+    vertShaderCompiled = loadShaderSource(vertShaderPath, GL_VERTEX_SHADER, gl);
     gl->glAttachShader(shaderProgramId, vertexShaderId);
 
     // Attach fragment shader.
     fragmentShaderId = gl->glCreateShader(GL_FRAGMENT_SHADER);
-    loadShaderSource(fragShaderPath, GL_FRAGMENT_SHADER, gl);
+    fragShaderCompiled = loadShaderSource(fragShaderPath, GL_FRAGMENT_SHADER, gl);
     gl->glAttachShader(shaderProgramId, fragmentShaderId);
 
     gl->glLinkProgram(shaderProgramId);
@@ -49,4 +49,14 @@ bool Shader::loadShaderSource(std::string filename, GLenum shaderType, QOpenGLFu
     GLint compiledSuccessfully;
     gl->glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &compiledSuccessfully);
     return compiledSuccessfully > 0;
+}
+
+bool Shader::fragmentShaderCompiled()
+{
+    return fragShaderCompiled;
+}
+
+bool Shader::vertexShaderCompiled()
+{
+    return vertShaderCompiled;
 }
