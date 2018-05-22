@@ -46,8 +46,6 @@ DISTFILES += \
     ../shader/shader.frag \
     ../shader/shader.vert
 
-# path is the destination path.
-# files are the paths for the files to be copied to the destination path
 # TODO: make paths work for debug, release, etc
 message($$shell_path($$top_srcdir/shader/shader.vert))
 shaders.path = $$shell_path($$OUT_PWD/debug/shader)

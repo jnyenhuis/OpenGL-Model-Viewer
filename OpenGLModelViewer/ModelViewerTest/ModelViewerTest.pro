@@ -14,11 +14,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-INCLUDEPATH += $$top_srcdir/libs
+INCLUDEPATH += $$top_srcdir/libs \
+                $$top_srcdir/src
 
 SOURCES += \
         main.cpp \
-    ../test/test.cpp
+    ../test/test.cpp \
+    ../test/fileiotest.cpp \
+    ../src/fileio.cpp \
 
 HEADERS += \
-    ../libs/catch.hpp
+    ../libs/catch.hpp \
+    ../src/fileio.h \
+
+# TODO: make paths work for debug, release, etc
+text_files.path = $$shell_path($$OUT_PWD/debug/data)
+text_files.files += $$shell_path($$top_srcdir/test/data/test.frag)
+INSTALLS += text_files

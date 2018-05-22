@@ -6,8 +6,7 @@
 
 int main(int argc, char *argv[])
 {
-    std::cout << "Dank memes.\n";
-
+    std::cout << argv[0] << "\n";
     int result = Catch::Session().run( argc, argv );
     return ( result < 0xff ? result : 0xff );
 }

@@ -7,6 +7,7 @@
 class Shader
 {
 public:
+    Shader();
     Shader(QOpenGLFunctions_3_3_Core *gl, std::string vertShaderPath, std::string fragShaderPath);
     bool fragmentShaderCompiled();
     bool vertexShaderCompiled();
@@ -20,7 +21,7 @@ private:
     uint vertexShaderId;
     bool vertShaderCompiled = false;
 
-    bool loadShaderSource(std::string filename, GLenum shaderType, QOpenGLFunctions_3_3_Core *gl);
+    bool loadShaderSource(std::string filename, QOpenGLFunctions_3_3_Core *gl);
 };
 
 #endif // SHADER_H

@@ -5,25 +5,28 @@
 
 #include <QDebug>
 
+Shader::Shader()
+{
+
+}
+
 Shader::Shader(QOpenGLFunctions_3_3_Core *gl, std::string vertShaderPath, std::string fragShaderPath)
 {
-    // Generate the shader program and shader IDs.
+    // Generate the shader program.
     shaderProgramId = gl->glCreateProgram();
 
     // Attach vertex shader.
     vertexShaderId = gl->glCreateShader(GL_VERTEX_SHADER);
-    vertShaderCompiled = loadShaderSource(vertShaderPath, GL_VERTEX_SHADER, gl);
-    gl->glAttachShader(shaderProgramId, vertexShaderId);
+    vertShaderCompiled = loadShaderSource(vertShaderPath, gl);
 
     // Attach fragment shader.
     fragmentShaderId = gl->glCreateShader(GL_FRAGMENT_SHADER);
-    fragShaderCompiled = loadShaderSource(fragShaderPath, GL_FRAGMENT_SHADER, gl);
-    gl->glAttachShader(shaderProgramId, fragmentShaderId);
+    fragShaderCompiled = loadShaderSource(fragShaderPath, gl);
 
     gl->glLinkProgram(shaderProgramId);
 }
 
-bool Shader::loadShaderSource(std::string filename, GLenum shaderType, QOpenGLFunctions_3_3_Core *gl)
+bool Shader::loadShaderSource(std::string filename, QOpenGLFunctions_3_3_Core *gl)
 {
     // Read shader text from file. OpenGL can't use std::string directly.
     std::string shaderText = OpenGlModelViewer::readAllText(filename);
@@ -32,18 +35,23 @@ bool Shader::loadShaderSource(std::string filename, GLenum shaderType, QOpenGLFu
     }
     const char *shaderSource = shaderText.c_str();
 
+    // Determine the shader type based on the file extension.
     uint shaderId;
-    if (shaderType == vertexShaderId) {
+    uint shaderType;
+    if (filename.substr(filename.find_last_of(".") + 1) == "vert") {
         shaderId = vertexShaderId;
+        shaderType = GL_VERTEX_SHADER;
     } else if (shaderType == GL_FRAGMENT_SHADER) {
         shaderId = fragmentShaderId;
+        shaderType = GL_FRAGMENT_SHADER;
     } else {
         return false; // Shader type is not supported.
     }
 
     // Load and compile the shader source.
     gl->glShaderSource(shaderId, 1, &shaderSource, nullptr);
-    gl->glCompileShader(fragmentShaderId);
+    gl->glCompileShader(shaderId);
+    gl->glAttachShader(shaderProgramId, shaderId);
 
     // Check if the shader compiled correctly.
     GLint compiledSuccessfully;
