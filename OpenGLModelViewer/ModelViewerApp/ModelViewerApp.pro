@@ -24,21 +24,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += \
-        ..\src\main.cpp \
-        ..\src\mainwindow.cpp \
-    ..\src\openglviewportwidget.cpp \
-    ..\src/fileio.cpp \
-    ..\src/shader.cpp
+    ../src/main.cpp \
+    ../src/mainwindow.cpp \
+    ../src/openglviewportwidget.cpp \
+    ../src/fileio.cpp \
+    ../src/shader.cpp \
+    ../src/mesh.cpp \
+    ../src/vertex.cpp
 
 HEADERS += \
-        ..\src\mainwindow.h \
-    ..\src\openglviewportwidget.h \
-    ..\src/globals.h \
-    ..\src/fileio.h \
-    ..\src/shader.h
+    ../src/mainwindow.h \
+    ../src/openglviewportwidget.h \
+    ../src/globals.h \
+    ../src/fileio.h \
+    ../src/shader.h \
+    ../src/mesh.h \
+    ../src/vertex.h
 
 FORMS += \
-    ..\src\mainwindow.ui
+    ../src/mainwindow.ui
 
 LIBS += opengl32.lib
 
@@ -47,7 +51,6 @@ DISTFILES += \
     ../shader/shader.vert
 
 # TODO: make paths work for debug, release, etc
-message($$shell_path($$top_srcdir/shader/shader.vert))
 shaders.path = $$shell_path($$OUT_PWD/debug/shader)
 shaders.files += $$shell_path($$top_srcdir/shader/shader.frag)
 shaders.files += $$shell_path($$top_srcdir/shader/shader.vert)
