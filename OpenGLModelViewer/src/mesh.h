@@ -3,17 +3,20 @@
 
 #include <QString>
 #include <QList>
+#include <QOpenGLFunctions_3_3_Core>
 
 #include "vertex.h"
 
-class Mesh
-{
+class Mesh {
+private:
+    QOpenGLFunctions_3_3_Core *gl;
 public:
     uint vbo;
     uint vao;
     QList<Vertex> vertices;
 
-    Mesh();
+    Mesh(QOpenGLFunctions_3_3_Core *gl);
+    void draw();
 };
 
 #endif // MESH_H
